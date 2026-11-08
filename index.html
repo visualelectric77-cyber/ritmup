@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RITMUP · Tu cinta, a otro ritmo</title>
+<meta name="description" content="Clases guiadas para correr en cualquier cinta: coach de voz, música que cambia contigo, 13 mundos 3D y Apple Watch. Gratis, sin cuentas y sin anuncios.">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-H1v6Cs8IeQiFqIe1RD/aQZivnb0AEtxhiuzb4EOqQgU='; style-src 'unsafe-inline'; img-src 'self'; media-src 'self'; connect-src 'none'; font-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="apple-itunes-app" content="app-id=6824474102">
+<meta property="og:type" content="website">
+<meta property="og:title" content="RITMUP · Tu cinta, a otro ritmo">
+<meta property="og:description" content="Clases guiadas para cualquier cinta, con coach de voz, música y mundos 3D. Gratis, sin cuentas y sin anuncios.">
+<meta property="og:image" content="https://visualelectric77-cyber.github.io/ritmup/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+  :root {
+    --o: #FF5A1F; --warm: #64D2FF; --jog: #30D158; --run: #FFD60A; --fast: #FF9F0A; --spr: #FF375F; --cal: #7D7AFF;
+    --t2: #C7C7CC; --t3: #8E8E93; --hair: rgba(255,255,255,.14); --pad: 22px; --ease: cubic-bezier(.2,.8,.2,1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: #000; color-scheme: dark; -webkit-text-size-adjust: 100%; }
+  body { background: #000; color: #fff; font: 100%/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  img, video, svg { display: block; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  :focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  .disp { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -.045em; line-height: .95; }
+  .num { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.05em; line-height: .9; }
+  .lab { font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .side { padding-left: var(--pad); padding-right: var(--pad); }
+  .get { display: inline-flex; align-items: center; justify-content: center; min-height: 3.5rem; padding: 0 1.75rem; border-radius: 999px; background: #fff; color: #000; font-weight: 700; font-size: 1.0625rem; text-decoration: none; transition: transform .1s ease-out; }
+  .get:active { transform: scale(.97); }
+  .ej { font-size: .6875rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); }
+
+  /* ── Portada: una clase en marcha ── */
+  .hero { position: relative; height: 100vh; height: 100svh; min-height: 620px; overflow: hidden; }
+  .hero video, .hero .sh { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero video { object-fit: cover; }
+  .hero .sh { background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 26%, rgba(0,0,0,0) 44%, rgba(0,0,0,.86) 80%, #000 100%); }
+  .brand { position: absolute; z-index: 2; left: var(--pad); top: calc(env(safe-area-inset-top) + 20px); width: 112px; }
+  .live { position: absolute; z-index: 2; left: 0; right: 0; top: 17%; text-align: center; text-shadow: 0 2px 40px rgba(0,0,0,.45); }
+  .live .z { display: inline-flex; align-items: center; gap: .5em; color: var(--jog); transition: color .15s; }
+  .live .z i { width: .5em; height: .5em; border-radius: 50%; background: currentColor; }
+  .live .v { font-size: clamp(6.5rem, 33vw, 12rem); margin-top: .08em; }
+  .live .u { font-size: .75rem; font-weight: 600; letter-spacing: .1em; color: rgba(255,255,255,.75); margin-top: .5em; }
+  .hero-foot { position: absolute; z-index: 2; left: var(--pad); right: var(--pad); bottom: calc(env(safe-area-inset-bottom) + 26px); }
+  .hero h1 { font-size: clamp(3.5rem, 15vw, 8.5rem); }
+  .hero p { font-size: 1.125rem; line-height: 1.3; color: #fff; margin: .85rem 0 1.25rem; max-width: 25em; }
+  .hero small { display: block; font-size: .875rem; color: var(--t2); margin-top: .75rem; }
+
+  /* ── La pared ── */
+  .wall { height: 240vh; position: relative; }
+  .wall > div { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+  .wall p { font-size: clamp(2.5rem, 11vw, 7rem); color: #fff; opacity: .13; }
+  .wall p + p { margin-top: .22em; }
+  .wall .era { color: var(--o); font-size: clamp(4rem, 17.5vw, 13rem); margin-top: .22em; white-space: nowrap; }
+
+  /* ── Lucía ── */
+  .coach { display: grid; gap: 2.75rem; padding-top: 5.5rem; padding-bottom: 6.5rem; }
+  .dev { position: relative; width: min(76vw, 350px); margin: 0 auto; }
+  .dev img, .shot img, .tri img, .pair img { width: 100%; height: auto; }
+  .cd { position: absolute; left: 7.63%; top: 3.97%; width: 84.74%; height: 92.05%; border-radius: 17% / 8%; display: grid; place-items: center; background: rgba(0,0,0,.42); opacity: 0; transition: opacity .12s; font-size: clamp(8rem, 40vw, 13rem); color: #fff; }
+  .cd.on { opacity: 1; }
+  .cd.go { font-size: clamp(3rem, 15vw, 4.75rem); color: var(--jog); letter-spacing: -.03em; }
+  .coach h2 { font-size: clamp(3.1rem, 13.5vw, 6.75rem); }
+  .coach p.t { font-size: 1.1875rem; line-height: 1.34; color: var(--t2); margin-top: 1.1rem; max-width: 27em; }
+  .play { display: flex; align-items: center; gap: .9rem; margin-top: 1.9rem; text-align: left; transition: transform .1s ease-out; }
+  .play:active { transform: scale(.97); }
+  .play b { width: 4.25rem; height: 4.25rem; border-radius: 50%; background: var(--o); display: grid; place-items: center; flex: none; }
+  .play b i { width: 0; height: 0; margin-left: 5px; border-style: solid; border-width: 12px 0 12px 19px; border-color: transparent transparent transparent #000; }
+  .play.on b i { margin: 0; border: 0; width: 18px; height: 22px; border-left: 6px solid #000; border-right: 6px solid #000; }
+  .play span { font-size: 1.1875rem; font-weight: 700; min-height: 1.4em; }
+  .coach small { display: block; color: var(--t3); font-size: .9375rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--hair); max-width: 30em; }
+
+  /* ── Mundos ── */
+  .worlds { position: relative; height: 100vh; height: 100svh; min-height: 620px; overflow: hidden; background: #000; }
+  .worlds video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .28s ease; }
+  .worlds video.on { opacity: 1; }
+  .worlds .sh { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,0) 28%, rgba(0,0,0,0) 54%, rgba(0,0,0,.9) 100%); }
+  .w-head { position: absolute; z-index: 2; top: calc(env(safe-area-inset-top) + 24px); left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .w-head h2 { font-size: clamp(1.5rem, 5.5vw, 2.25rem); letter-spacing: -.03em; }
+  .w-head span { font-variant-numeric: tabular-nums; font-weight: 700; font-size: .9375rem; }
+  .w-now { position: absolute; z-index: 2; left: var(--pad); right: var(--pad); bottom: calc(env(safe-area-inset-bottom) + 92px); }
+  .w-now b { display: block; font-size: clamp(3.4rem, 14.5vw, 9rem); }
+  .w-now p { font-size: 1.0625rem; line-height: 1.3; margin-top: .55rem; max-width: 26em; min-height: 2.6em; }
+  .w-list { position: absolute; z-index: 3; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom) + 16px); display: flex; gap: .25rem; overflow-x: auto; padding: 0 var(--pad); scrollbar-width: none; scroll-padding: 0 var(--pad); }
+  .w-list::-webkit-scrollbar { display: none; }
+  .w-list button { flex: none; min-height: 3rem; padding: 0 .85rem; font-size: 1rem; font-weight: 600; color: rgba(255,255,255,.62); position: relative; white-space: nowrap; transition: color .15s; }
+  .w-list button[aria-pressed="true"] { color: #fff; }
+  .w-list button[aria-pressed="true"]::after { content: ""; position: absolute; left: .85rem; right: .85rem; bottom: .45rem; height: 2px; background: var(--o); }
+
+  /* ── Música ── */
+  .music { padding: 6rem 0 5.5rem; overflow: hidden; }
+  .music .big { display: flex; align-items: flex-end; gap: .1em; flex-wrap: wrap; }
+  .music .n83 { font-size: clamp(9rem, 44vw, 22rem); }
+  .music h2 { font-size: clamp(2rem, 8.5vw, 4.25rem); padding-bottom: .22em; }
+  .rows { margin-top: 2.25rem; display: grid; gap: .5rem; }
+  .row { display: flex; width: max-content; gap: 2.25rem; animation: tick 70s linear infinite; }
+  .row.b { animation-direction: reverse; animation-duration: 88s; }
+  .row span { white-space: nowrap; font-size: 1rem; color: var(--t3); }
+  .row em { font-style: normal; color: #fff; font-weight: 600; }
+  .row u { text-decoration: none; color: var(--o); font-variant-numeric: tabular-nums; font-weight: 700; margin-left: .35em; }
+  @keyframes tick { to { transform: translateX(-50%); } }
+  .music p.t { font-size: 1.1875rem; line-height: 1.34; color: var(--t2); margin-top: 2.25rem; max-width: 28em; }
+
+  /* ── Reloj ── */
+  .watch { padding-top: 6rem; padding-bottom: 6rem; background: radial-gradient(ellipse 720px 520px at 50% 42%, #1a1a1c 0%, #000 72%); }
+  .watch h2 { font-size: clamp(3.1rem, 13.5vw, 6.75rem); }
+  .pair { margin: 2.5rem auto 1.25rem; max-width: 640px; }
+  .pair figcaption { display: grid; grid-template-columns: 1fr 1fr; text-align: center; font-size: .9375rem; font-weight: 600; color: var(--t2); margin-top: .25rem; }
+  .facts { display: grid; margin-top: 2.5rem; border-top: 1px solid var(--hair); }
+  .facts div { display: grid; grid-template-columns: 5.6rem 1fr; gap: 1rem; align-items: baseline; padding: 1.05rem 0; border-bottom: 1px solid var(--hair); }
+  .facts b { font-size: 1.75rem; }
+  .facts p { font-size: 1.0625rem; line-height: 1.3; color: var(--t2); }
+
+  /* ── Clases y plan ── */
+  .board { padding-top: 6rem; padding-bottom: 5.5rem; }
+  .board h2, .health h2 { font-size: clamp(3.1rem, 13.5vw, 6.75rem); }
+  .table { margin-top: 2.5rem; list-style: none; }
+  .table li { display: grid; grid-template-columns: 1fr auto; gap: .35rem .75rem; padding: .7rem 0; align-items: baseline; }
+  .table span { font-weight: 600; font-size: 1.125rem; }
+  .table b { font-size: 1.625rem; }
+  .table i { grid-column: 1 / -1; display: block; height: 6px; background: var(--c); width: var(--w); transform-origin: left; }
+  .tfoot { margin-top: .9rem; color: var(--t3); font-size: .9375rem; }
+  .plan { display: grid; gap: 3rem; margin-top: 5rem; }
+  .shot { width: min(84vw, 420px); margin: 0 auto; }
+  .plan h3 { font-size: clamp(2.3rem, 10vw, 4.25rem); }
+  .plan p { font-size: 1.1875rem; line-height: 1.34; color: var(--t2); margin-top: .9rem; max-width: 27em; }
+  .dist { display: flex; gap: 1.1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .dist b { font-size: 2.25rem; }
+  .spd { display: flex; gap: .95rem; margin-top: 1.25rem; flex-wrap: wrap; }
+  .spd b { font-size: 2.25rem; }
+  .gap { margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--hair); }
+
+  /* ── Salud ── */
+  .health { padding-top: 6rem; padding-bottom: 6rem; }
+  .health p.t { font-size: 1.1875rem; line-height: 1.34; color: var(--t2); margin-top: 1.1rem; max-width: 28em; }
+  .tri { margin: 2.5rem calc(var(--pad) * -.6) 0; max-width: 1040px; }
+  .tri figcaption { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; padding: .75rem calc(var(--pad) * .6) 0; font-size: .9375rem; font-weight: 700; line-height: 1.2; text-align: center; }
+
+  /* ── Meta ── */
+  .meta { position: relative; height: 100vh; height: 100svh; min-height: 620px; overflow: hidden; }
+  .meta video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .meta .sh { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 34%, rgba(0,0,0,.8) 74%, #000 100%); }
+  .meta > div.c { position: absolute; z-index: 2; left: var(--pad); right: var(--pad); bottom: calc(env(safe-area-inset-bottom) + 96px); }
+  .meta h2 { font-size: clamp(5.5rem, 27vw, 16rem); }
+  .meta p { font-size: 1.1875rem; margin: .85rem 0 1.4rem; }
+
+  footer { padding-top: 3rem; padding-bottom: calc(env(safe-area-inset-bottom) + 96px); color: var(--t3); font-size: .875rem; line-height: 1.45; }
+  .sign { font-size: 1.25rem; line-height: 1.32; color: #fff; max-width: 27em; margin-bottom: 2.5rem; font-weight: 500; }
+  footer nav { display: flex; flex-wrap: wrap; gap: .25rem 1.4rem; margin-bottom: 1.1rem; }
+  footer nav a { color: #fff; font-weight: 600; text-decoration: none; min-height: 2.75rem; display: inline-flex; align-items: center; }
+  footer p + p { margin-top: .5rem; }
+
+  /* ── La clase que te acompaña ── */
+  .bar { position: fixed; z-index: 20; left: 10px; right: 10px; bottom: calc(env(safe-area-inset-bottom) + 10px); height: 64px; border-radius: 22px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .85rem; padding: 0 8px 0 15px;
+         background: rgba(22,22,24,.72); -webkit-backdrop-filter: blur(24px) saturate(170%); backdrop-filter: blur(24px) saturate(170%); box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 12px 40px rgba(0,0,0,.5);
+         transform: translateY(140%); transition: transform .42s var(--ease); }
+  .bar.on { transform: none; }
+  .bar .sp { min-width: 4.1rem; }
+  .bar .sp small { display: block; font-size: .625rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c, #fff); white-space: nowrap; transition: color .2s; }
+  .bar .sp b { font-size: 1.625rem; display: block; line-height: 1; margin-top: 2px; }
+  .prof { display: flex; align-items: flex-end; gap: 2px; height: 34px; min-width: 0; }
+  .prof i { flex: 1; min-width: 3px; background: var(--c); opacity: .3; transition: opacity .2s; }
+  .prof i.done { opacity: 1; }
+  .bar .get { min-height: 48px; padding: 0 1.1rem; font-size: .9375rem; border-radius: 16px; }
+  .bar .get .l { display: none; }
+
+  @media (min-width: 820px) {
+    :root { --pad: max(48px, calc((100vw - 1180px) / 2)); }
+    .brand { width: 136px; top: 34px; }
+    .live { top: auto; bottom: 8%; left: auto; right: var(--pad); text-align: right; }
+    .live .z { font-size: .875rem; }
+    .live .v { font-size: 12.5rem; }
+    .hero-foot { right: 46%; bottom: 8%; }
+    .hero p { font-size: 1.3125rem; }
+    .coach { grid-template-columns: 350px 1fr; gap: 5.5rem; align-items: center; padding-top: 9rem; padding-bottom: 9rem; }
+    .w-now { bottom: 84px; right: 38%; }
+    .w-list { left: auto; right: var(--pad); top: 0; bottom: 0; flex-direction: column; justify-content: center; padding: 0; overflow: visible; align-items: flex-end; gap: 0; }
+    .w-list button { min-height: 2.5rem; font-size: 1.125rem; padding: 0; }
+    .w-list button[aria-pressed="true"]::after { left: auto; right: -14px; top: 50%; bottom: auto; width: 8px; height: 8px; border-radius: 50%; transform: translateY(-50%); }
+    .worlds .sh { background: linear-gradient(90deg, rgba(0,0,0,0) 62%, rgba(0,0,0,.72) 100%), linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 26%, rgba(0,0,0,0) 56%, rgba(0,0,0,.88) 100%); }
+    .music { padding: 9rem 0 8rem; }
+    .watch, .board, .health { padding-top: 9rem; padding-bottom: 9rem; }
+    .facts { grid-template-columns: repeat(3, 1fr); gap: 0 2.5rem; border-top: 0; }
+    .facts div { grid-template-columns: 1fr; gap: .4rem; border-top: 1px solid var(--hair); border-bottom: 0; }
+    .table { columns: 2; column-gap: 4rem; }
+    .table li { break-inside: avoid; }
+    .plan { grid-template-columns: 420px 1fr; gap: 6rem; align-items: center; margin-top: 8rem; }
+    .tri { margin-left: auto; margin-right: auto; }
+    .meta > div.c { bottom: 110px; }
+    .bar { left: 50%; right: auto; width: 620px; margin-left: -310px; bottom: 18px; }
+    .bar .get .l { display: inline; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .row { animation: none; } .bar { transition: none; }
+    .wall { height: auto; } .wall > div { position: static; height: auto; padding: 6rem 0; } .wall p { opacity: 1; }
+    .worlds video { transition: none; }
+  }
+  @media (prefers-reduced-transparency: reduce) { .bar { background: #161618; -webkit-backdrop-filter: none; backdrop-filter: none; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <video id="hv" muted loop playsinline preload="auto" aria-label="Una clase de RITMUP en marcha: el mundo cambia de color al entrar en sprint"></video>
+  <div class="sh"></div>
+  <img class="brand" src="assets/wordmark.svg" alt="RITMUP">
+  <div class="live" aria-hidden="true">
+    <div class="z lab"><i></i><span id="hz">Trotar</span></div>
+    <div class="v num" id="hs">8,3</div>
+    <div class="u">KM/H</div>
+  </div>
+  <div class="hero-foot">
+    <h1 class="disp">Tu cinta, a otro ritmo.</h1>
+    <p>Clases guiadas para cualquier cinta, la del gimnasio o la de casa.</p>
+    <a class="get" rel="noopener noreferrer" href="https://apps.apple.com/es/app/id6824474102">Descargar en el App Store</a>
+    <small>Gratis. Sin cuentas. Sin anuncios.</small>
+  </div>
+</header>
+
+<main>
+  <section class="wall side" data-z="warm" data-l="Calentar" data-s="7.1" aria-label="Correr en cinta era aburrido">
+    <div>
+      <p class="disp ln">Mirando la pared.</p>
+      <p class="disp ln">Sin saber a qué ritmo ir.</p>
+      <p class="disp ln">Y a los diez minutos, ganas de bajarte.</p>
+      <p class="disp ln era">Se acabó.</p>
+    </div>
+  </section>
+
+  <section class="coach side" data-z="jog" data-l="Trotar" data-s="8.3" aria-labelledby="h-c">
+    <div class="dev"><img src="assets/m-clase.webp" width="1000" height="2000" alt="Una clase en el iPhone: faltan segundos para el sprint"><div class="cd num" id="cd" aria-hidden="true"></div></div>
+    <div>
+      <h2 class="disp" id="h-c">Lucía avisa.<br>Tú subes.</h2>
+      <p class="t">Diez segundos antes de cada cambio te dice qué viene. Cuenta tres, dos, uno y pulsas el + de la cinta.</p>
+      <button class="play" id="play" type="button" aria-pressed="false"><b><i></i></b><span id="say">Escúchala</span></button>
+      <audio id="voz" src="assets/lucia.mp3" preload="none"></audio>
+      <small>RITMUP no se conecta a la máquina: la velocidad la marcas tú. Por eso funciona con cualquier cinta.</small>
+    </div>
+  </section>
+
+  <section class="worlds" id="worlds" data-z="run" data-l="Correr" data-s="10.1" aria-labelledby="h-w">
+    <video id="w1" muted playsinline preload="none"></video>
+    <video id="w2" muted playsinline preload="none"></video>
+    <div class="sh"></div>
+    <div class="w-head"><h2 class="disp" id="h-w">Dónde corres hoy</h2><span id="wn" aria-hidden="true">01/13</span></div>
+    <div class="w-now" aria-live="polite"><b class="disp" id="wt"></b><p id="wd"></p></div>
+    <div class="w-list" id="wl"></div>
+  </section>
+
+  <section class="music" data-z="fast" data-l="Rápido" data-s="11.5" aria-labelledby="h-m">
+    <div class="big side"><span class="n83 num" aria-hidden="true">83</span><h2 class="disp" id="h-m">canciones.<br>Cambian a compás.</h2></div>
+    <div class="rows" aria-hidden="true"><div class="row" id="r1"></div><div class="row b" id="r2"></div></div>
+    <p class="t side">Cuando cambia el tramo, cambia la pista, justo en el compás. Mucho techno melódico y trance. ¿Prefieres la tuya? Spotify, Apple Music o YouTube, y Lucía habla por encima.</p>
+  </section>
+
+  <section class="watch side" data-z="fast" data-l="Rápido +" data-s="12.1" aria-labelledby="h-a">
+    <h2 class="disp" id="h-a">Tu pulso, en la muñeca.</h2>
+    <figure class="pair">
+      <img loading="lazy" src="assets/m-relojes.webp" width="1500" height="1761" alt="Apple Watch Ultra con el pulso de una clase de RITMUP y Apple Watch con el aviso de cambio de velocidad">
+      <figcaption><span>Apple Watch Ultra</span><span>Apple Watch</span></figcaption>
+    </figure>
+    <div class="facts">
+      <div><b class="num" style="color:var(--spr)">147</b><p>Pulso y zona en directo, en la muñeca y en el iPhone.</p></div>
+      <div><b class="num" style="color:var(--fast)">±0,2</b><p>Si se te dispara, Lucía te baja el ritmo. Si vas sobrado, te lo sube.</p></div>
+      <div><b class="num" style="color:var(--jog)">3·2·1</b><p>El aviso también vibra en la muñeca. Empieza, pausa y salta de tramo desde el reloj.</p></div>
+    </div>
+  </section>
+
+  <section class="board side" data-z="spr" data-l="Sprint" data-s="13" aria-labelledby="h-b">
+    <h2 class="disp" id="h-b">Hoy cuestas.<br>Mañana fartlek.</h2>
+    <ul class="table" aria-label="113 clases por tipo">
+      <li style="--c:var(--spr);--w:100%"><span>Intervalos</span><b class="num">26</b><i></i></li>
+      <li style="--c:var(--fast);--w:65%"><span>Fartlek</span><b class="num">17</b><i></i></li>
+      <li style="--c:var(--run);--w:62%"><span>Cuestas</span><b class="num">16</b><i></i></li>
+      <li style="--c:var(--o);--w:62%"><span>Retos</span><b class="num">16</b><i></i></li>
+      <li style="--c:var(--jog);--w:58%"><span>Resistencia</span><b class="num">15</b><i></i></li>
+      <li style="--c:var(--run);--w:54%"><span>Tempo</span><b class="num">14</b><i></i></li>
+      <li style="--c:var(--cal);--w:31%"><span>Recuperación</span><b class="num">8</b><i></i></li>
+      <li style="--c:var(--warm);--w:4%"><span>Test VAM</span><b class="num">1</b><i></i></li>
+    </ul>
+    <p class="tfoot">113 clases, de 20 a 60 minutos. Las cuestas, si tu cinta tiene inclinación.</p>
+
+    <div class="plan">
+      <div><div class="shot"><img loading="lazy" src="assets/m-plan.webp" width="1000" height="1769" alt="Mi plan: faltan 6 semanas para un 10K"></div><p class="ej" style="text-align:center;margin-top:.75rem">Datos de ejemplo</p></div>
+      <div>
+        <h3 class="disp">Ponle fecha a tu carrera.</h3>
+        <p>El plan te lleva semana a semana. Y ese día la clase es la carrera: salida, un arco por kilómetro y meta en la distancia exacta.</p>
+        <div class="dist"><b class="num">5K</b><b class="num">10K</b><b class="num">15K</b><b class="num">Media</b></div>
+        <div class="gap">
+          <h3 class="disp">Mide a qué velocidad vas.</h3>
+          <p>El Test VAM sube 0,5 km/h cada minuto hasta que no puedas más. Con eso ajusta tus cuatro velocidades.</p>
+          <div class="spd"><b class="num" style="color:var(--jog)">8,3</b><b class="num" style="color:var(--run)">10,1</b><b class="num" style="color:var(--fast)">11,5</b><b class="num" style="color:var(--spr)">13,0</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="health side" data-z="jog" data-l="Recupera" data-s="8.1" aria-labelledby="h-s">
+    <h2 class="disp" id="h-s">Duermes mal.<br>Tu pulso lo sabe.</h2>
+    <p class="t">RITMUP cruza lo que dice Salud con tus clases. Cálculos fijos, y si aún no hay datos suficientes te lo dice. Nada sale de tu iPhone.</p>
+    <figure class="tri">
+      <img loading="lazy" src="assets/m-salud.webp" width="1760" height="1291" alt="Pantallas de Sueño, Tu forma y Carga y descanso">
+      <figcaption><span>Dormir poco te cuesta 3 ppm</span><span>A 10 km/h, 7 ppm menos</span><span>Carga equilibrada</span></figcaption>
+    </figure>
+    <p class="ej" style="margin-top:1rem">Datos de ejemplo</p>
+  </section>
+
+  <section class="meta" data-z="cal" data-l="Calma" data-s="6.5" aria-labelledby="h-z">
+    <video id="mv" muted loop playsinline preload="none" poster="assets/meta.jpg"></video>
+    <div class="sh"></div>
+    <div class="c">
+      <h2 class="disp" id="h-z">Meta.</h2>
+      <p>Gratis. Sin cuentas. Sin anuncios. Tus datos, en tu iPhone.</p>
+      <a class="get" rel="noopener noreferrer" href="https://apps.apple.com/es/app/id6824474102">Descargar en el App Store</a>
+    </div>
+  </section>
+</main>
+
+<footer class="side">
+  <p class="sign">La hice porque me aburría en la cinta del gimnasio. Año y medio de vibecoding y cero código a mano: la ha escrito Claude Code. Nacho.</p>
+  <nav aria-label="Información">
+    <a rel="noopener noreferrer" href="https://visualelectric77-cyber.github.io/bestrunning/legal/privacidad.html">Privacidad</a>
+    <a rel="noopener noreferrer" href="https://visualelectric77-cyber.github.io/bestrunning/legal/terminos.html">Términos</a>
+    <a rel="noopener noreferrer" href="https://visualelectric77-cyber.github.io/bestrunning/legal/soporte.html">Soporte</a>
+    <a rel="noopener noreferrer" href="https://www.instagram.com/nacho.buildswithclaude/">Instagram</a>
+    <a rel="noopener noreferrer" href="https://x.com/Nachoo0p">X</a>
+  </nav>
+  <p>Para iPhone, en español. El Apple Watch es opcional. RITMUP no es un dispositivo médico: consulta a tu médico antes de empezar un programa de ejercicio.</p>
+  <p>© 2026 Nacho Garcia. Sin relación con Anthropic ni con Apple. Voz de Lucía generada con IA, con licencia comercial. Música de Pixabay. Mapas © OpenStreetMap contributors.</p>
+</footer>
+
+<nav class="bar" id="bar" aria-label="Descargar RITMUP">
+  <div class="sp" aria-hidden="true"><small id="bz">Calentar</small><b class="num" id="bs">7,1</b></div>
+  <div class="prof" id="prof" aria-hidden="true"></div>
+  <a class="get" rel="noopener noreferrer" href="https://apps.apple.com/es/app/id6824474102">Descargar<span class="l">&nbsp;en el App Store</span></a>
+</nav>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const tall = () => innerHeight >= innerWidth;
+  const kind = tall() ? 'v' : 'h';
+  const fmt = (v) => v.toFixed(1).replace('.', ',');
+
+  /* Portada: la velocidad cambia en el mismo instante en que el mundo entra en sprint (a los 2,5 s de cada tramo de 5,5 s) */
+  const hv = $('hv');
+  hv.poster = `assets/hero-${kind}.jpg`;
+  hv.src = `assets/hero-${kind}.mp4`;
+  const hz = $('hz'), hs = $('hs'), zone = hz.parentElement;
+  let sprint = null;
+  const heroTick = () => {
+    const s = (hv.currentTime % 5.5) >= 2.5;
+    if (s !== sprint) { sprint = s; hs.textContent = s ? '13,0' : '8,3'; hz.textContent = s ? 'Sprint' : 'Trotar'; zone.style.color = s ? 'var(--spr)' : 'var(--jog)'; }
+    if (!document.hidden) requestAnimationFrame(heroTick);
+  };
+  if (!calm) { hv.play().catch(() => {}); requestAnimationFrame(heroTick); }
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && !calm) requestAnimationFrame(heroTick); });
+
+  /* La pared: cada frase se enciende al llegar a ella */
+  const wall = document.querySelector('.wall'), lines = [...document.querySelectorAll('.ln')];
+  let wTick = false;
+  const wallUpdate = () => { wTick = false;
+    const r = wall.getBoundingClientRect(), p = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
+    lines.forEach((l, i) => { const a = (p * lines.length * 1.08 - i); l.style.opacity = .13 + .87 * Math.min(1, Math.max(0, a)); });
+  };
+  if (!calm) { addEventListener('scroll', () => { if (!wTick) { wTick = true; requestAnimationFrame(wallUpdate); } }, { passive: true }); wallUpdate(); }
+
+  /* Lucía: la cuenta atrás va pegada a su voz */
+  const a = $('voz'), b = $('play'), say = $('say'), cd = $('cd');
+  const CUES = [[0, '¡Prepárate para el sprint!', ''], [2.05, 'A trece.', ''], [2.96, 'Tres…', '3'], [4.04, 'Dos…', '2'], [5.11, 'Uno…', '1'], [6.02, '¡Vamos!', '¡VAMOS!']];
+  let cur = -1;
+  const voice = () => {
+    if (a.paused) return;
+    let i = -1; for (let k = 0; k < CUES.length; k++) if (a.currentTime >= CUES[k][0]) i = k;
+    if (i !== cur && i >= 0) { cur = i; const [, t, n] = CUES[i]; say.textContent = t; cd.textContent = n; cd.classList.toggle('on', !!n); cd.classList.toggle('go', n.length > 1); }
+    requestAnimationFrame(voice);
+  };
+  const stop = () => { cur = -1; b.classList.remove('on'); b.setAttribute('aria-pressed', 'false'); say.textContent = 'Escúchala'; cd.classList.remove('on', 'go'); };
+  b.addEventListener('click', () => { if (a.paused) { a.currentTime = 0; a.play().catch(stop); if (innerWidth < 820) cd.parentElement.scrollIntoView({ block: 'center', behavior: calm ? 'auto' : 'smooth' }); } else { a.pause(); } });
+  a.addEventListener('play', () => { b.classList.add('on'); b.setAttribute('aria-pressed', 'true'); requestAnimationFrame(voice); });
+  a.addEventListener('pause', stop); a.addEventListener('ended', stop);
+
+  /* Mundos: los 13, en vídeo real. Pasan solos hasta que eliges uno */
+  const W = [
+    ['vision', 'Modo visión', 'Tu clase como una escalera de luz: cada escalón es un tramo.'],
+    ['costa', 'Costa', 'Paseo marítimo al amanecer, con las farolas aún encendidas.'],
+    ['neon', 'Neón', 'Una avenida mojada entre rascacielos y rótulos.'],
+    ['desierto', 'Desierto', 'Una carretera recta bajo la Vía Láctea.'],
+    ['tunel', 'Túnel', 'Anillos de luz del color de tu tramo. Para series.'],
+    ['bosque', 'Bosque', 'Un sendero entre abetos, con niebla de la mañana.'],
+    ['aurora', 'Aurora', 'Noche de estrellas y un río de luz del color de tu tramo.'],
+    ['cordillera', 'Cordillera', 'Tu clase como una cordillera: cada intervalo, una cumbre.'],
+    ['estadio', 'Estadio', 'Pista de atletismo de noche, con luces a tu velocidad.'],
+    ['ciudad-berlin', 'Berlín', 'Los últimos 3,4 km del maratón, por sus calles reales.'],
+    ['ciudad-berlin-10k', 'Berlín 10 km', 'Del Kurfürstendamm a la Puerta de Brandeburgo.'],
+    ['ciudad-madrid', 'Madrid', 'Atocha, el Prado y Cibeles hasta la meta.'],
+    ['blank', 'Grafito', 'Suelo de grafito y horizonte limpio. El más sobrio.'],
+  ];
+  const wl = $('wl'), v = [$('w1'), $('w2')], stage = $('worlds');
+  let at = 0, front = 0, token = 0, auto = true, seen = false;
+  const btns = W.map(([, name], i) => { const x = document.createElement('button'); x.type = 'button'; x.textContent = name; x.setAttribute('aria-pressed', 'false'); x.addEventListener('click', () => { auto = false; show(i); }); wl.appendChild(x); return x; });
+  function label(i) {
+    $('wt').textContent = W[i][1]; $('wd').textContent = W[i][2]; $('wn').textContent = String(i + 1).padStart(2, '0') + '/13';
+    btns.forEach((x, k) => x.setAttribute('aria-pressed', k === i ? 'true' : 'false'));
+    if (wl.scrollWidth > wl.clientWidth + 2) wl.scrollTo({ left: btns[i].offsetLeft - 22, behavior: calm ? 'auto' : 'smooth' });
+  }
+  function show(i) {
+    at = i; label(i); const t = ++token, next = v[1 - front];
+    next.poster = `assets/w/${W[i][0]}-${kind}.jpg`; next.src = `assets/w/${W[i][0]}-${kind}.mp4`; next.loop = !auto; next.currentTime = 0;
+    const go = () => { if (t !== token) return; next.classList.add('on'); v[front].classList.remove('on'); const old = v[front]; front = 1 - front; setTimeout(() => { if (t === token) old.pause(); }, 320); };
+    if (calm) { go(); return; }
+    next.play().then(go).catch(go);
+  }
+  v.forEach((x) => x.addEventListener('ended', () => { if (auto && x === v[front]) show((at + 1) % W.length); }));
+  label(0);
+
+  /* Vídeos que solo cargan y suenan cuando se ven */
+  const mv = $('mv');
+  new IntersectionObserver(([e]) => { if (e.isIntersecting) { if (!seen) { seen = true; show(0); } else if (!calm) v[front].play().catch(() => {}); } else v[front].pause(); }, { threshold: .15 }).observe(stage);
+  const io2 = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.target === mv.parentElement) { if (e.isIntersecting) { if (!mv.getAttribute('src')) mv.src = `assets/meta-${kind}.mp4`; if (!calm) mv.play().catch(() => {}); } else mv.pause(); }
+    else if (!calm) { if (e.isIntersecting) hv.play().catch(() => {}); else hv.pause(); }
+  }), { threshold: .15 });
+  io2.observe(mv.parentElement); io2.observe(hv.parentElement);
+
+  /* Música: títulos reales de la biblioteca */
+  const T = [['Night Trains', 'Saturn-3-Music', 123], ['Veiled', 'Saturn-3-Music', 122], ['Somewhere We Got Lost', 'Saturn-3-Music', 122], ['The Dance of the Sun', 'Nemeti_Tivadar', 122], ['Melodic Techno #03', 'tAUREON', 124], ['Lost in Time', 'ThisIsBeatKitchen', 128], ['Melodic Symbiose', 'Rizzlas', 128], ['Victims of Society', 'Alan_Frijns', 130], ['Angeli Domini', 'Verbundnetzhaushalt', 142], ['State of Trance', 'MC_QUATTRO', 125], ['Dark Ravers', 'Argimirorobles', 138], ['Dark Groove', 'NaturesEye', 135]];
+  const line = (arr) => { const h = arr.map(([t, a, b]) => `<span><em>${t}</em> ${a}<u>${b}</u></span>`).join(''); return h + h; };
+  $('r1').innerHTML = line(T); $('r2').innerHTML = line([...T].reverse());
+
+  /* La clase te acompaña: cada sección es un tramo */
+  const COL = { warm: '#64D2FF', jog: '#30D158', run: '#FFD60A', fast: '#FF9F0A', spr: '#FF375F', cal: '#7D7AFF' };
+  const secs = [...document.querySelectorAll('section[data-s]')];
+  const prof = $('prof'), bar = $('bar'), bz = $('bz'), bs = $('bs');
+  const bars = secs.map((s) => { const i = document.createElement('i'); i.style.setProperty('--c', COL[s.dataset.z]); i.style.height = Math.round(((+s.dataset.s - 5) / 8) * 100) + '%'; prof.appendChild(i); return i; });
+  let val = 7.1, goal = 7.1, vel = 0, raf = 0, last = 0;
+  const spring = (t) => { /* muelle críticamente amortiguado: si cambia el objetivo a medias, sigue desde donde va */
+    const dt = Math.min(.05, (t - last) / 1000 || .016); last = t; const w = 11;
+    const x = val - goal, e = Math.exp(-w * dt), j = (vel + w * x) * dt; val = goal + (x + j) * e; vel = (vel - w * j) * e;
+    bs.textContent = fmt(val);
+    if (Math.abs(val - goal) > .02 || Math.abs(vel) > .05) raf = requestAnimationFrame(spring); else { val = goal; vel = 0; bs.textContent = fmt(val); raf = 0; }
+  };
+  const tramo = (i) => { const s = secs[i]; bz.textContent = s.dataset.l; bar.style.setProperty('--c', COL[s.dataset.z]); bars.forEach((b, k) => b.classList.toggle('done', k <= i)); goal = +s.dataset.s;
+    if (calm) { val = goal; bs.textContent = fmt(val); } else if (!raf) { last = performance.now(); raf = requestAnimationFrame(spring); } };
+  let curSec = -1, st = false;
+  const pos = () => { st = false; const mid = innerHeight * .55; let i = 0; secs.forEach((s, k) => { if (s.getBoundingClientRect().top <= mid) i = k; }); if (i !== curSec) { curSec = i; tramo(i); }
+    const hb = hv.parentElement.getBoundingClientRect().bottom; bar.classList.toggle('on', hb < innerHeight * .4); };
+  addEventListener('scroll', () => { if (!st) { st = true; requestAnimationFrame(pos); } }, { passive: true }); addEventListener('resize', pos); pos();
+})();
+</script>
+</body>
+</html>
