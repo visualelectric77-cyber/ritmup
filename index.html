@@ -8,13 +8,20 @@
 <meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="dark">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-H1v6Cs8IeQiFqIe1RD/aQZivnb0AEtxhiuzb4EOqQgU='; style-src 'unsafe-inline'; img-src 'self'; media-src 'self'; connect-src 'none'; font-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-a23d5LtdQpSKTDBq6TIDQ1Ij2mtwSlKVPk4w5t3T5bM='; style-src 'unsafe-inline'; img-src 'self'; media-src 'self'; connect-src 'none'; font-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="apple-itunes-app" content="app-id=6824474102">
 <meta property="og:type" content="website">
 <meta property="og:title" content="RITMUP · Tu cinta, a otro ritmo">
 <meta property="og:description" content="Clases guiadas para cualquier cinta, con coach de voz, música y mundos 3D. Gratis, sin cuentas y sin anuncios.">
 <meta property="og:image" content="https://visualelectric77-cyber.github.io/ritmup/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="RITMUP: clases guiadas para correr en cinta">
+<meta property="og:url" content="https://visualelectric77-cyber.github.io/ritmup/">
+<meta property="og:site_name" content="RITMUP">
+<meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://visualelectric77-cyber.github.io/ritmup/">
 <link rel="icon" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <style>
@@ -86,10 +93,10 @@
   .w-head { position: absolute; z-index: 2; top: calc(env(safe-area-inset-top) + 24px); left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
   .w-head h2 { font-size: clamp(1.5rem, 5.5vw, 2.25rem); letter-spacing: -.03em; }
   .w-head span { font-variant-numeric: tabular-nums; font-weight: 700; font-size: .9375rem; }
-  .w-now { position: absolute; z-index: 2; left: var(--pad); right: var(--pad); bottom: calc(env(safe-area-inset-bottom) + 92px); }
+  .w-now { position: absolute; z-index: 2; left: var(--pad); right: var(--pad); bottom: calc(env(safe-area-inset-bottom) + 144px); }
   .w-now b { display: block; font-size: clamp(3.4rem, 14.5vw, 9rem); }
   .w-now p { font-size: 1.0625rem; line-height: 1.3; margin-top: .55rem; max-width: 26em; min-height: 2.6em; }
-  .w-list { position: absolute; z-index: 3; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom) + 16px); display: flex; gap: .25rem; overflow-x: auto; padding: 0 var(--pad); scrollbar-width: none; scroll-padding: 0 var(--pad); }
+  .w-list { position: absolute; z-index: 3; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom) + 82px); display: flex; gap: .25rem; overflow-x: auto; padding: 0 var(--pad); scrollbar-width: none; scroll-padding: 0 var(--pad); }
   .w-list::-webkit-scrollbar { display: none; }
   .w-list button { flex: none; min-height: 3rem; padding: 0 .85rem; font-size: 1rem; font-weight: 600; color: rgba(255,255,255,.62); position: relative; white-space: nowrap; transition: color .15s; }
   .w-list button[aria-pressed="true"] { color: #fff; }
@@ -131,7 +138,7 @@
   .plan { display: grid; gap: 3rem; margin-top: 5rem; }
   .shot { width: min(84vw, 420px); margin: 0 auto; }
   .plan h3 { font-size: clamp(2.3rem, 10vw, 4.25rem); }
-  .plan p { font-size: 1.1875rem; line-height: 1.34; color: var(--t2); margin-top: .9rem; max-width: 27em; }
+  .plan p:not(.ej) { font-size: 1.1875rem; line-height: 1.34; color: var(--t2); margin-top: .9rem; max-width: 27em; }
   .dist { display: flex; gap: 1.1rem; margin-top: 1.5rem; flex-wrap: wrap; }
   .dist b { font-size: 2.25rem; }
   .spd { display: flex; gap: .95rem; margin-top: 1.25rem; flex-wrap: wrap; }
@@ -142,7 +149,7 @@
   .health { padding-top: 6rem; padding-bottom: 6rem; }
   .health p.t { font-size: 1.1875rem; line-height: 1.34; color: var(--t2); margin-top: 1.1rem; max-width: 28em; }
   .tri { margin: 2.5rem calc(var(--pad) * -.6) 0; max-width: 1040px; }
-  .tri figcaption { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; padding: .75rem calc(var(--pad) * .6) 0; font-size: .9375rem; font-weight: 700; line-height: 1.2; text-align: center; }
+  .tri figcaption { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; padding: .75rem calc(var(--pad) * .6) 0; font-size: .8125rem; font-weight: 700; line-height: 1.2; text-align: center; text-wrap: balance; }
 
   /* ── Meta ── */
   .meta { position: relative; height: 100vh; height: 100svh; min-height: 620px; overflow: hidden; }
@@ -154,7 +161,7 @@
 
   footer { padding-top: 3rem; padding-bottom: calc(env(safe-area-inset-bottom) + 96px); color: var(--t3); font-size: .875rem; line-height: 1.45; }
   .sign { font-size: 1.25rem; line-height: 1.32; color: #fff; max-width: 27em; margin-bottom: 2.5rem; font-weight: 500; }
-  footer nav { display: flex; flex-wrap: wrap; gap: .25rem 1.4rem; margin-bottom: 1.1rem; }
+  footer nav { display: flex; flex-wrap: wrap; gap: .25rem clamp(.9rem, 4vw, 1.4rem); margin-bottom: 1.1rem; }
   footer nav a { color: #fff; font-weight: 600; text-decoration: none; min-height: 2.75rem; display: inline-flex; align-items: center; }
   footer p + p { margin-top: .5rem; }
 
@@ -194,6 +201,7 @@
     .table li { break-inside: avoid; }
     .plan { grid-template-columns: 420px 1fr; gap: 6rem; align-items: center; margin-top: 8rem; }
     .tri { margin-left: auto; margin-right: auto; }
+    .tri figcaption { font-size: .9375rem; }
     .meta > div.c { bottom: 110px; }
     .bar { left: 50%; right: auto; width: 620px; margin-left: -310px; bottom: 18px; }
     .bar .get .l { display: inline; }
@@ -294,6 +302,7 @@
         <h3 class="disp">Ponle fecha a tu carrera.</h3>
         <p>El plan te lleva semana a semana. Y ese día la clase es la carrera: salida, un arco por kilómetro y meta en la distancia exacta.</p>
         <div class="dist"><b class="num">5K</b><b class="num">10K</b><b class="num">15K</b><b class="num">Media</b></div>
+        <p style="margin-top:1.5rem">¿Sin carrera? Cada cuatro semanas el plan elige qué trabajar según lo que más te cuesta y cambia el tipo de tu sesión clave.</p>
         <div class="gap">
           <h3 class="disp">Mide a qué velocidad vas.</h3>
           <p>El Test VAM sube 0,5 km/h cada minuto hasta que no puedas más. Con eso ajusta tus cuatro velocidades.</p>
@@ -305,7 +314,7 @@
 
   <section class="health side" data-z="jog" data-l="Recupera" data-s="8.1" aria-labelledby="h-s">
     <h2 class="disp" id="h-s">Duermes mal.<br>Tu pulso lo sabe.</h2>
-    <p class="t">RITMUP cruza lo que dice Salud con tus clases. Cálculos fijos, y si aún no hay datos suficientes te lo dice. Nada sale de tu iPhone.</p>
+    <p class="t">RITMUP cruza lo que dice Salud con tus clases. Al terminar cada una ves su análisis, y semana a semana tu evolución: pulso, velocidades y semanas flojas. Cálculos fijos, y si aún no hay datos suficientes te lo dice. Nada sale de tu iPhone.</p>
     <figure class="tri">
       <img loading="lazy" src="assets/m-salud.webp" width="1760" height="1291" alt="Pantallas de Sueño, Tu forma y Carga y descanso">
       <figcaption><span>Dormir poco te cuesta 3 ppm</span><span>A 10 km/h, 7 ppm menos</span><span>Carga equilibrada</span></figcaption>
@@ -314,7 +323,7 @@
   </section>
 
   <section class="meta" data-z="cal" data-l="Calma" data-s="6.5" aria-labelledby="h-z">
-    <video id="mv" muted loop playsinline preload="none" poster="assets/meta.jpg"></video>
+    <video id="mv" muted loop playsinline preload="none"></video>
     <div class="sh"></div>
     <div class="c">
       <h2 class="disp" id="h-z">Meta.</h2>
@@ -333,7 +342,7 @@
     <a rel="noopener noreferrer" href="https://www.instagram.com/nacho.buildswithclaude/">Instagram</a>
     <a rel="noopener noreferrer" href="https://x.com/Nachoo0p">X</a>
   </nav>
-  <p>Para iPhone, en español. El Apple Watch es opcional. RITMUP no es un dispositivo médico: consulta a tu médico antes de empezar un programa de ejercicio.</p>
+  <p>Para iPhone, en español, con interfaz al estilo Liquid Glass de iOS 26. El Apple Watch es opcional. RITMUP no es un dispositivo médico: consulta a tu médico antes de empezar un programa de ejercicio.</p>
   <p>© 2026 Nacho Garcia. Sin relación con Anthropic ni con Apple. Voz de Lucía generada con IA, con licencia comercial. Música de Pixabay. Mapas © OpenStreetMap contributors.</p>
 </footer>
 
@@ -424,7 +433,7 @@
   label(0);
 
   /* Vídeos que solo cargan y suenan cuando se ven */
-  const mv = $('mv');
+  const mv = $('mv'); mv.poster = `assets/meta-${kind}.jpg`;
   new IntersectionObserver(([e]) => { if (e.isIntersecting) { if (!seen) { seen = true; show(0); } else if (!calm) v[front].play().catch(() => {}); } else v[front].pause(); }, { threshold: .15 }).observe(stage);
   const io2 = new IntersectionObserver((es) => es.forEach((e) => {
     if (e.target === mv.parentElement) { if (e.isIntersecting) { if (!mv.getAttribute('src')) mv.src = `assets/meta-${kind}.mp4`; if (!calm) mv.play().catch(() => {}); } else mv.pause(); }
